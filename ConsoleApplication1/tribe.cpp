@@ -6,16 +6,26 @@ void Tribe::init( int maxSurvivors )
 	m_currentNumOfSurvivors = 0;
 	m_allSurvivors = new Survivor*[m_maxSurvivors];
 }
+void Tribe::setName(const char* name)
+{
+	//if ()
+	this->m_name = new char[Survivor::MAX_NAME_SIZE];
+	strcpy(m_name, name);
+}
 //----------------------------------------------------------------------------------------//
-bool Tribe::addSurvivor( Survivor& newSurvivor )
+void Tribe::addSurvivor( Survivor& newSurvivor )
 {
 	if( m_currentNumOfSurvivors < m_maxSurvivors )
 	{
-		m_allSurvivors[m_currentNumOfSurvivors++] = &newSurvivor;
-		return true;
-	}
+		m_allSurvivors[m_currentNumOfSurvivors] = 
+			&newSurvivor;
 
-	return false;
+		++m_currentNumOfSurvivors;
+		
+		return;
+	}
+	else
+	 throw "No more room to add survivors";
 }
 //----------------------------------------------------------------------------------------//
 Survivor** Tribe::getAllSurvivors()

@@ -11,10 +11,18 @@ using namespace std;
 class Survivor
 {
 public:
+
 	enum eFamilyStatus { SINGLE, MARRIED, IN_A_RELATIONSHIP };
 	static const int MAX_NAME_SIZE = 21;
 
 public:
+	
+	Survivor(const char* name, int age,  eFamilyStatus status) {
+		setName(name);
+		setAge(age);
+		setStatus(status);
+	}
+
 	inline void setName(const char* name);
 	
 	static bool isValidName(const char* name)
@@ -25,27 +33,38 @@ public:
 			isValidAlphanumericName(name);
 	}
 
-	//as a cpp developer, write an bool isValidAlphanumericName(char* name) function
+	//as a cpp CS Student, write an bool isValidAlphanumericName(char* name) function
 	//	ChatGPT
 
 	static bool isValidAlphanumericName(const char* name) {
-		while (*name) {
-			if (!std::isalnum(static_cast<unsigned char>(*name))) {
+		if (name == nullptr || name[0] == '\0') {
+			return false;  // Empty or null name is not valid
+		}
+
+		int i = 0;
+		while (name[i] != '\0') {
+			char c = name[i];
+			bool isAlphanumeric = (c >= 'A' && c <= 'Z') ||
+				(c >= 'a' && c <= 'z') ||
+				(c >= '0' && c <= '9');
+
+			if (!isAlphanumeric) {
 				return false;
 			}
-			++name;
+
+			i++;
 		}
 		return true;
 	}
 	
 	static bool isValidNameLen(const char* name) {
-		return strlen(name) >= MAX_NAME_SIZE;
+		return strlen(name) <= MAX_NAME_SIZE;
 	}
 
-	inline const char* getName() const;
+	const char* getName() const { return this->m_name; }
 
 	inline void setAge(int age);
-	inline int getAge() const;
+	inline int getAge() const { return this->m_age; }
 
 	void setStatus(eFamilyStatus status) { this->m_status = status;  }
 	eFamilyStatus getStatus() const { return this->m_status; }
@@ -54,7 +73,7 @@ public:
 	void print() const;
 
 private:
-	char			m_name[MAX_NAME_SIZE];
+	char * 			m_name;
 	int				m_age;
 	eFamilyStatus	m_status;
 };

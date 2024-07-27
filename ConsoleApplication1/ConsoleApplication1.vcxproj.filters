@@ -35,6 +35,9 @@
     <ClInclude Include="survivor.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="catch2.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="תרגולים\תרגול 2.pdf">
